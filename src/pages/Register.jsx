@@ -1,6 +1,6 @@
 import { useState } from "react";
 import API from "../utils/api";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const token = localStorage.getItem("token");
@@ -17,7 +17,7 @@ function Register() {
 
 
   if (token) {
-    return <Navigate to="/dashboard" />;
+    navigate("/dashboard");
   }
 
   const handleChange = (e) => {

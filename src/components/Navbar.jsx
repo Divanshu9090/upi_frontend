@@ -18,7 +18,7 @@ function Navbar() {
     <nav className="navbar">
       {/* TOP SECTION */}
       <div className="nav-top">
-        <h3 style={{ cursor: "pointer" }} onClick={() => navigate("/")}>
+        <h3 style={{ cursor: "pointer" }} onClick={() => user ? navigate("/dashboard") : navigate("/")}>
           💸 UPI App
         </h3>
       </div>

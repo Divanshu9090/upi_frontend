@@ -1,12 +1,13 @@
 import { useState } from "react";
 import API from "../utils/api";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   if (token) {
-    return <Navigate to="/dashboard" />;
+    navigate("/dashboard");
   }
 
   const [phone, setPhone] = useState("");
@@ -33,7 +34,7 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
     } catch (err) {
       alert("Server error");
     } finally {
@@ -64,7 +65,7 @@ function Login() {
 
         <p
           style={{ textAlign: "center", marginTop: "10px", cursor: "pointer" }}
-          onClick={() => (window.location.href = "/register")}
+          onClick={() => navigate("/register")}
         >
           Create Account
         </p>

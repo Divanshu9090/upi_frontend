@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchProfile();
@@ -15,7 +17,7 @@ function Dashboard() {
       if (res.data.error) {
         alert(res.data.error);
         localStorage.clear();
-        window.location.href = "/";
+        navigate("/");
         return;
       }
 
@@ -24,7 +26,7 @@ function Dashboard() {
       console.error(err);
       alert("Session expired");
       localStorage.clear();
-      window.location.href = "/";
+      navigate("/");
     }
   };
   if (!user) return <h2>Loading...</h2>;
@@ -45,21 +47,15 @@ function Dashboard() {
           </div>
         )}
 
-        <button
-          className="btn"
-          onClick={() => (window.location.href = "/add-money")}
-        >
+        <button className="btn" onClick={() => navigate("/add-money")}>
           ➕ Add Money
         </button>
 
-        <button className="btn" onClick={() => (window.location.href = "/pay")}>
+        <button className="btn" onClick={() => navigate("/pay")}>
           💸 Pay
         </button>
 
-        <button
-          className="btn"
-          onClick={() => (window.location.href = "/history")}
-        >
+        <button className="btn" onClick={() => navigate("/history")}>
           📜 History
         </button>
       </div>
