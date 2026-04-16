@@ -1,12 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-function Navbar() {
+function Navbar({ theme, setTheme }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -16,34 +20,35 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      {/* TOP SECTION */}
+
+      {/* LEFT */}
       <div className="nav-top">
-        <h3 style={{ cursor: "pointer" }} onClick={() => user ? navigate("/dashboard") : navigate("/")}>
+        <h3 onClick={() => (user ? navigate("/dashboard") : navigate("/"))}>
           💸 UPI App
         </h3>
       </div>
 
+      {/* HAMBURGER (mobile only) */}
+      <div className="hamburger" onClick={() => setOpen(!open)}>
+        ☰
+      </div>
+
       {/* NAV LINKS */}
       <div className={`nav-links ${open ? "active" : ""}`}>
+
+        <button className="theme-btn" onClick={toggleTheme}>
+          {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+        </button>
+
         {!token ? (
           <>
-            <Link to="/" onClick={() => setOpen(false)}>
-              🔐 Login
-            </Link>
-
-            <Link to="/register" onClick={() => setOpen(false)}>
-              📝 Register
-            </Link>
+            <Link to="/" onClick={() => setOpen(false)}>🔐 Login</Link>
+            <Link to="/register" onClick={() => setOpen(false)}>📝 Register</Link>
           </>
         ) : (
           <>
-            <Link to="/dashboard" onClick={() => setOpen(false)}>
-              🏠 Dashboard
-            </Link>
-
-            <Link to="/history" onClick={() => setOpen(false)}>
-              📜 History
-            </Link>
+            <Link to="/dashboard" onClick={() => setOpen(false)}>🏠 Dashboard</Link>
+            <Link to="/history" onClick={() => setOpen(false)}>📜 History</Link>
 
             <button
               className="logout-btn"

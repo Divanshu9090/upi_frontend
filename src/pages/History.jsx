@@ -36,62 +36,67 @@ function History() {
 
   return (
     <div className="page">
-      <div className="glass" style={{ width: "420px" }}>
+      {/* Wider container */}
+      <div className="glass" style={{ width: "100%", maxWidth: "1000px" }}>
         <h2 className="title">📜 Transaction History</h2>
 
         {transactions.length === 0 && (
           <p style={{ textAlign: "center" }}>No transactions found</p>
         )}
 
-        {transactions.map((tx) => {
-          const isSender = tx.sender?._id === user._id;
+        {/* GRID START */}
+        <div className="history-grid">
+          {transactions.map((tx) => {
+            const isSender = tx.sender?._id === user._id;
 
-          return (
-            <div key={tx._id} className="card">
-              {/* Direction */}
-              <p style={{ fontWeight: "bold" }}>
-                {isSender ? "➡ Sent To" : "⬅ Received From"}
-              </p>
+            return (
+              <div key={tx._id} className="card">
+                {/* Direction */}
+                <p style={{ fontWeight: "bold" }}>
+                  {isSender ? "➡ Sent To" : "⬅ Received From"}
+                </p>
 
-              {/* Name */}
-              <p>
-                <b>Name:</b>{" "}
-                {isSender
-                  ? tx.receiver?.name || tx.receiverInfo?.name || "Unknown"
-                  : tx.sender?.name}
-              </p>
+                {/* Name */}
+                <p>
+                  <b>Name:</b>{" "}
+                  {isSender
+                    ? tx.receiver?.name || tx.receiverInfo?.name || "Unknown"
+                    : tx.sender?.name}
+                </p>
 
-              {/* Phone */}
-              <p>
-                <b>Phone:</b>{" "}
-                {isSender
-                  ? tx.receiver?.phone || tx.receiverInfo?.phone
-                  : tx.sender?.phone}
-              </p>
+                {/* Phone */}
+                <p>
+                  <b>Phone:</b>{" "}
+                  {isSender
+                    ? tx.receiver?.phone || tx.receiverInfo?.phone
+                    : tx.sender?.phone}
+                </p>
 
-              {/* Amount */}
-              <p style={{ marginTop: "5px" }}>
-                <b>Amount:</b>{" "}
-                <span style={{ fontWeight: "bold" }}>₹{tx.amount}</span>
-              </p>
+                {/* Amount */}
+                <p>
+                  <b>Amount:</b>{" "}
+                  <span style={{ fontWeight: "bold" }}>₹{tx.amount}</span>
+                </p>
 
-              {/* Status */}
-              <p>
-                <b>Status:</b>{" "}
-                {tx.fraud ? (
-                  <span className="error">🚨 Fraud Blocked</span>
-                ) : (
-                  <span className="success">✅ Success</span>
-                )}
-              </p>
+                {/* Status */}
+                <p>
+                  <b>Status:</b>{" "}
+                  {tx.fraud ? (
+                    <span className="error">🚨 Fraud Blocked</span>
+                  ) : (
+                    <span className="success">✅ Success</span>
+                  )}
+                </p>
 
-              {/* Date */}
-              <p style={{ fontSize: "12px", opacity: 0.7 }}>
-                {new Date(tx.createdAt).toLocaleString()}
-              </p>
-            </div>
-          );
-        })}
+                {/* Date */}
+                <p style={{ fontSize: "12px", opacity: 0.7 }}>
+                  {new Date(tx.createdAt).toLocaleString()}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+        {/* GRID END */}
 
         {/* Back Button */}
         <button className="btn" onClick={() => navigate("/dashboard")}>

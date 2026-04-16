@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import API from "../utils/api";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
 
+  const [toast, setToast] = useState(null);
+
+  const token = localStorage.getItem("token");
   if (token) {
     navigate("/dashboard");
   }
@@ -14,10 +16,23 @@ function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => {
+        setToast(null);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
+
   const handleLogin = async () => {
     try {
       if (!phone || !password) {
-        return alert("Please fill all fields");
+        return setToast({
+          type: "error",
+          message: "Please fill all fields",
+        });
       }
 
       setLoading(true);
@@ -28,15 +43,28 @@ function Login() {
       });
 
       if (res.data.error) {
-        return alert(res.data.error);
+        return setToast({
+          type: "error",
+          message: res.data.error || "Invalid credentials",
+        });
       }
+
+      setToast({
+        type: "success",
+        message: "Login successful",
+      });
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     } catch (err) {
-      alert("Server error");
+      setToast({
+        type: "error",
+        message: "Server error",
+      });
     } finally {
       setLoading(false);
     }
@@ -44,6 +72,14 @@ function Login() {
 
   return (
     <div className="page">
+      {/* TOAST UI */}
+      {toast && (
+        <div className={`toast ${toast.type}`}>
+          <span>{toast.type === "error" ? "❌" : "✅"}</span>
+          <span>{toast.message}</span>
+        </div>
+      )}
+
       <div className="glass">
         <h2 className="title">🔐 Login</h2>
 
@@ -52,6 +88,7 @@ function Login() {
           placeholder="Phone"
           onChange={(e) => setPhone(e.target.value)}
         />
+
         <input
           className="input"
           type="password"

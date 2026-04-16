@@ -1,151 +1,208 @@
-/* ================= RESET ================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+/* ================= THEME VARIABLES ================= */
+:root {
+  --bg: #020617;
+  --card: rgba(255, 255, 255, 0.05);
+  --text: #ffffff;
+  --input: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.1);
+
+  /* Success Overlay */
+  --overlay-bg: rgba(2, 6, 23, 0.9);
+  --success-bg: #22c55e;
+  --success-text: #ffffff;
 }
 
+/* LIGHT THEME */
+.light {
+  --bg: #f1f5f9;
+  --card: #ffffff;
+  --text: #0f172a;
+  --input: #e2e8f0;
+  --border: #cbd5e1;
+
+  /* Success Overlay */
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+  --success-bg: #16a34a;
+  --success-text: #ffffff;
+}
+
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ================= BODY ================= */
 body {
-    min-height: 100vh;
-    background: radial-gradient(circle at top, #1e293b, #020617);
-    color: #fff;
-    overflow-x: hidden;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, var(--bg), #020617);
+  color: var(--text);
+  transition: all 0.3s ease;
 }
 
 /* ================= LAYOUT ================= */
 .page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 90vh;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 20px;
 }
 
 /* ================= GLASS CARD ================= */
 .glass {
-    width: 100%;
-    max-width: 400px;
-    padding: 30px;
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
-    transition: 0.3s;
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+.light .glass {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .glass:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 60px rgba(99, 102, 241, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 0 60px rgba(99, 102, 241, 0.3);
 }
 
 /* ================= TEXT ================= */
 .title {
-    font-size: 22px;
-    text-align: center;
-    margin-bottom: 20px;
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /* ================= INPUT ================= */
 .input,
 select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    outline: none;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--input);
+  color: var(--text);
+  outline: none;
+  transition: 0.3s;
 }
 
-/* Dropdown fix */
-select option {
-    background: #1e293b;
-    color: white;
+.input:focus {
+  box-shadow: 0 0 0 2px #6366f1;
 }
 
 /* ================= BUTTON ================= */
 .btn {
-    width: 100%;
-    padding: 12px;
-    margin-top: 12px;
-    border-radius: 10px;
-    border: none;
-    background: linear-gradient(135deg, #6366f1, #22c55e);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #6366f1;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #6366f1;
+}
+
+.btn:active {
+  transform: scale(0.97);
 }
 
 /* ================= CARD ================= */
 .card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-radius: 12px;
-    margin: 10px 0;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--card);
+  color: var(--text);
+  padding: 15px;
+  border-radius: 12px;
+  margin: 10px 0;
+  border: 1px solid var(--border);
+  transition: 0.3s;
+}
+
+.light .card {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
 }
 
 /* ================= STATUS ================= */
 .success {
-    color: #22c55e;
+  color: #22c55e;
 }
 
 .error {
-    color: #ef4444;
+  color: #ef4444;
 }
 
 .balance {
-    font-size: 20px;
-    font-weight: bold;
-    color: #22c55e;
+  font-size: 20px;
+  font-weight: bold;
+  color: #22c55e;
 }
 
 /* ================= NAVBAR ================= */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: nowrap; /* ✅ prevent breaking */
+  position: relative; /* IMPORTANT */
+  z-index: 1000;
+}
+
+.light .navbar {
+  background: rgba(255, 255, 255, 0.9);
 }
 
 /* navbar links */
 .navbar a {
-    margin: 0 10px;
-    color: #38bdf8;
-    text-decoration: none;
-    font-weight: 500;
+  margin: 0 10px;
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  color: #22c55e;
 }
 
 /* logout button */
 .logout-btn {
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: none;
-    background: linear-gradient(135deg, #ef4444, #f97316);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .logout-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.6);
+  transform: scale(1.1);
 }
 
-/* TOAST */
+/* ================= TOAST ================= */
 .toast {
   position: fixed;
   top: 80px;
@@ -153,175 +210,6 @@ select option {
   padding: 15px 20px;
   border-radius: 12px;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-  font-weight: 500;
-  z-index: 1000;
-  animation: slideIn 0.4s ease;
-}
-
-/* SUCCESS */
-.toast.success {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-}
-
-/* ERROR */
-.toast.error {
-  background: linear-gradient(135deg, #ef4444, #b91c1c);
-}
-
-/* ICON */
-.toast .icon {
-  font-size: 20px;
-}
-
-/* ANIMATION */
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .toast {
-    right: 10px;
-    left: 10px;
-    top: 70px;
-  }
-}
-
-/* ================= TABLET ================= */
-@media (max-width: 768px) {
-
-    .page {
-        align-items: flex-start;
-        padding: 20px 15px;
-    }
-
-    .glass {
-        max-width: 100%;
-        padding: 20px;
-        border-radius: 16px;
-    }
-
-    .title {
-        font-size: 18px;
-    }
-
-    .input,
-    select {
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    .btn {
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    .card {
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .balance {
-        font-size: 18px;
-    }
-
-    /* Navbar mobile */
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 15px;
-    }
-
-    .navbar div {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .logout-btn {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-}
-
-/* ================= MOBILE ================= */
-@media (max-width: 480px) {
-
-    .glass {
-        padding: 15px;
-    }
-
-    .title {
-        font-size: 16px;
-    }
-
-    .input,
-    select {
-        font-size: 13px;
-        padding: 9px;
-    }
-
-    .btn {
-        font-size: 13px;
-        padding: 9px;
-    }
-
-    .card {
-        font-size: 13px;
-        padding: 10px;
-    }
-
-    .navbar a {
-        font-size: 13px;
-    }
-
-    /* NAV TOP */
-    .nav-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-
-    /* NAV LINKS */
-    .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    /* HAMBURGER */
-    .hamburger {
-        display: none;
-        font-size: 24px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-}
-
-
-
-
-/* TOAST */
-.toast {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  padding: 15px 20px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
   gap: 10px;
   color: white;
   z-index: 1000;
@@ -341,37 +229,47 @@ select option {
   to { transform: translateX(0); opacity: 1; }
 }
 
-/* SUCCESS ANIMATION */
+/* ================= SUCCESS OVERLAY ================= */
 .success-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(2, 6, 23, 0.9);
+  background: var(--overlay-bg);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
+  backdrop-filter: blur(10px);
 }
 
 .success-box {
   text-align: center;
   animation: scaleUp 0.4s ease;
+  color: var(--text);
 }
 
 .checkmark {
   width: 80px;
   height: 80px;
-  background: #22c55e;
+  background: var(--success-bg);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 40px;
-  color: white;
+  color: var(--success-text);
   margin: 0 auto 15px;
   animation: pop 0.5s ease;
+}
+
+:root .checkmark {
+  box-shadow: 0 0 20px #22c55e;
+}
+
+.light .checkmark {
+  box-shadow: none;
 }
 
 @keyframes pop {
@@ -383,4 +281,71 @@ select option {
 @keyframes scaleUp {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+/* ================= GRID ================= */
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+
+/* ================= HAMBURGER ================= */
+.hamburger {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Desktop navbar (default) */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: block; /* show menu button */
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+
+    flex-direction: column;
+    gap: 10px;
+
+    display: none; /* hidden by default */
+
+    min-width: 160px;
+
+    z-index: 9999; /* 🔥 MOST IMPORTANT FIX */
+    backdrop-filter: blur(15px);
+  }
+
+  .nav-links.active {
+    display: flex; /* show when clicked */
+  }
+
+  .nav-links a,
+  .logout-btn,
+  .theme-btn {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass {
+    padding: 15px;
+  }
 }
