@@ -3,7 +3,7 @@
   --bg: #020617;
   --card: rgba(255, 255, 255, 0.05);
   --text: #ffffff;
-  --input: rgba(255, 255, 255, 0.1);
+  --input: rgb(30, 41, 59);
   --border: rgba(255, 255, 255, 0.1);
 
   /* Success Overlay */
@@ -19,7 +19,6 @@
   --text: #0f172a;
   --input: #e2e8f0;
   --border: #cbd5e1;
-
   /* Success Overlay */
   --overlay-bg: rgba(255, 255, 255, 0.9);
   --success-bg: #16a34a;
@@ -165,8 +164,10 @@ select {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
-  flex-wrap: nowrap; /* ✅ prevent breaking */
-  position: relative; /* IMPORTANT */
+  flex-wrap: nowrap;
+  /* ✅ prevent breaking */
+  position: relative;
+  /* IMPORTANT */
   z-index: 1000;
 }
 
@@ -225,8 +226,15 @@ select {
 }
 
 @keyframes slideIn {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* ================= SUCCESS OVERLAY ================= */
@@ -273,14 +281,29 @@ select {
 }
 
 @keyframes pop {
-  0% { transform: scale(0); }
-  80% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(0);
+  }
+
+  80% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes scaleUp {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* ================= GRID ================= */
@@ -310,7 +333,8 @@ select {
 @media (max-width: 768px) {
 
   .hamburger {
-    display: block; /* show menu button */
+    display: block;
+    /* show menu button */
   }
 
   .nav-links {
@@ -325,16 +349,19 @@ select {
     flex-direction: column;
     gap: 10px;
 
-    display: none; /* hidden by default */
+    display: none;
+    /* hidden by default */
 
     min-width: 160px;
 
-    z-index: 9999; /* 🔥 MOST IMPORTANT FIX */
+    z-index: 9999;
+    /* 🔥 MOST IMPORTANT FIX */
     backdrop-filter: blur(15px);
   }
 
   .nav-links.active {
-    display: flex; /* show when clicked */
+    display: flex;
+    /* show when clicked */
   }
 
   .nav-links a,
